@@ -1,45 +1,43 @@
 (function(){  
-
-  function outerNodes(element, pseudo){
-    var src = pseudo.source,
-        outer = xtag.pseudos.outer, 
-        nodes = outer.__nodes__[src.type] || (outer.__nodes__[src.type] = []),
-        pseudos = outer.__pseudos__[src.type] || (outer.__pseudos__[src.type] = []),
-        index = nodes.indexOf(element);
-    if (index == -1) {
-      nodes.push(element);
-      pseudos.push(pseudo);
+  
+  var events = {},
+      elements = {},
+      observers = {};
+  
+  function outerNodes(element, event){
+    var type = event.type,
+        el = elements[type] || (elements[type] = []),
+        ev = events[type] || (events[type] = []),
+        i = el.indexOf(element);
+    if (i == -1) {
+      el.push(element);
+      ev.push(event);
     }
     else {
-      nodes.splice(index, 1);
-      pseudos.splice(index, 1);
+      el.splice(i, 1);
+      ev.splice(index, 1);
     }
-    return nodes;
+    return el;
   }
   
   xtag.pseudos.outer = {
-    __nodes__: {},
-    __pseudos__: {},
-    __observers__: {},
     action: function(pseudo, e){
       if (this == e.target || this.contains && this.contains(e.target)) return null;
     },
     onRemove: function(pseudo){
       if (!outerNodes(this, pseudo).length) {
-        xtag.removeEvent(document, xtag.pseudos.outer.__observers__[pseudo.source.type]);
+        xtag.removeEvent(document, observers[pseudo.source.type]);
       }
     },
     onAdd: function(pseudo){
-      outerNodes(this, pseudo);
+      outerNodes(this, pseudo.source);
       var element = this,
-          type = pseudo.source.type,
-          outer = xtag.pseudos.outer;
-      if (!outer.__observers__[type]) {
-        outer.__observers__[type] = xtag.addEvent(document, type, function(e){
-          outer.__nodes__[type].forEach(function(node, i){
+          type = pseudo.source.type;
+      if (!observers[type]) {
+        observers[type] = xtag.addEvent(document, type, function(e){
+          elements[type].forEach(function(node, i){
             if (node == e.target || node.contains(e.target)) return;
-            var pseudo = outer.__pseudos__[type][i];
-            pseudo.source.stack.call(node, e);
+            events[type][i].stack.call(node, e);
           });
         });
       }
