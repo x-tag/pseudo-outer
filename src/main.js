@@ -25,7 +25,7 @@
       if (this == e.target || this.contains && this.contains(e.target)) return null;
     },
     onRemove: function(pseudo){
-      if (!outerNodes(this, pseudo).length) {
+      if (!outerNodes(this, pseudo.source).length) {
         xtag.removeEvent(document, observers[pseudo.source.type]);
       }
     },
