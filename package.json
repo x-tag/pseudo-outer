@@ -1,6 +1,6 @@
 {
-  "name": "outer pseudo",
-  "version": "0.1.0",
+  "name": "outer-pseudo",
+  "version": "0.1.1",
   "dependencies": {},
   "devDependencies": {
     "bower": "~1.1.0",

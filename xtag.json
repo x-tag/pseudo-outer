@@ -1,10 +1,13 @@
 {
 	"name": "outer pseudo",
 	"tagName": "",
-	"version": "0.1.0",
+	"version": "0.1.1",
 	"author": "Daniel Buchner",
 	"description": "",
-	"categories": ["pseudo", "events"],
+	"categories": [
+		"pseudo",
+		"events"
+	],
 	"compatibility": {
 		"firefox": 5,
 		"chrome": 4,
