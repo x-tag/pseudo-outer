@@ -15,7 +15,7 @@
     }
     else {
       el.splice(i, 1);
-      ev.splice(index, 1);
+      ev.splice(i, 1);
     }
     return el;
   }
