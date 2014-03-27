@@ -1,9 +1,9 @@
-(function(){  
-  
+(function(){
+
   var events = {},
       elements = {},
       observers = {};
-  
+
   function outerNodes(element, event){
     var type = event.type,
         el = elements[type] || (elements[type] = []),
@@ -19,7 +19,7 @@
     }
     return el;
   }
-  
+
   xtag.pseudos.outer = {
     action: function(pseudo, e){
       if (this == e.target || this.contains && this.contains(e.target)) return null;
@@ -42,6 +42,6 @@
         });
       }
     }
-  }
+  };
 
 })();

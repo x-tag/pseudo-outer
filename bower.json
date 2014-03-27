@@ -1,9 +1,10 @@
 {
-  "name": "outer pseudo",
-  "description": "Adds a pseudo to enable detection of when event occurs outside of the listening element",
+  "name": "Outer Pseudo",
+  "description": "Adds a pseudo to enable detection of when an event occurs outside of the listening element.",
   "version": "0.1.4",
   "keywords": [
     "web-components",
+    "pseudo",
     "x-tag"
   ],
   "main": [
